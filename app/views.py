@@ -45,11 +45,12 @@ async def import_csv_data(file: UploadFile):
                 continue
 
             # convert symptom_diagnostic into boolean values
-            if row[4].lower() == "TRUE" or row[4] == "Yes":
+            symptom_diagnostic_raw = row[4].lower()
+
+            if symptom_diagnostic_raw == "true" or symptom_diagnostic_raw == "yes":
                 symptom_diagnostic = True
             else:
                 symptom_diagnostic = False
-
             data = BusinessSymptomData(
                 business_id=int(row[0]),
                 business_name=row[1],
