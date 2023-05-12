@@ -1,6 +1,6 @@
 import uvicorn
 from fastapi import FastAPI # need python-multipart
-import views
+import app.views as views
 
 app = FastAPI(title="AdviNow Interview Challenge", version="1.6")
 
