@@ -2,11 +2,14 @@ from sqlalchemy import Column, Integer, String, DateTime, Boolean, create_engine
 from sqlalchemy.ext.declarative import declarative_base
 import datetime
 from sqlalchemy.orm import sessionmaker
+import settings
 
 
 Base = declarative_base()
-SQLALCHEMY_DATABASE_URL = "postgresql://user:password@localhost/dbname"
+SQLALCHEMY_DATABASE_URL = settings.DB_URL
+print(SQLALCHEMY_DATABASE_URL)
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
+
 
 SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
 Base.metadata.create_all(bind=engine)
