@@ -7,19 +7,25 @@ import csv
 
 
 
-router = APIRouter()
+router = APIRouter() #create instance of APIRouter to add endpoints
 
 @router.get("/business-symptom-data")
 async def get_business_symptom_data(business_id: int = None, diagnostic: bool = None):
     try:
+        #create db session object
         db = SessionLocal()
-        query = db.query(BusinessSymptomData)
+
+        #create query object with our model
+        query = db.query(BusinessSymptomData) 
         
+        #filter based on args
         if business_id:
             query = query.filter(BusinessSymptomData.business_id == business_id)
         if diagnostic is not None:
             query = query.filter(BusinessSymptomData.symptom_diagnostic == diagnostic)
         data = query.all()
+
+        #return JSON with queried data
         return JSONResponse(content=[{"Business ID": d.business_id,
                                       "Business Name": d.business_name,
                                       "Symptom Code": d.symptom_code,
@@ -33,7 +39,10 @@ async def get_business_symptom_data(business_id: int = None, diagnostic: bool = 
 async def import_csv_data(file: UploadFile):
     
     try:
+        #create db session object
         db = SessionLocal()
+
+        #read, decode and split csv
         csv_data = file.file.read().decode('utf-8').splitlines()
         csv_rows = csv.reader(csv_data)
         data_list = []
@@ -51,6 +60,8 @@ async def import_csv_data(file: UploadFile):
                 symptom_diagnostic = True
             else:
                 symptom_diagnostic = False
+
+            # create an instance of our model with the data from the current row.
             data = BusinessSymptomData(
                 business_id=int(row[0]),
                 business_name=row[1],
@@ -60,6 +71,7 @@ async def import_csv_data(file: UploadFile):
             )
             data_list.append(data)
 
+        
         db.add_all(data_list)
         db.commit()
 
