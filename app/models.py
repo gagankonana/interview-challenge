@@ -1,8 +1,7 @@
-from sqlalchemy import Column, Integer, String, DateTime, Boolean
+from sqlalchemy import Column, Integer, String, DateTime, Boolean, create_engine
 from sqlalchemy.ext.declarative import declarative_base
 import datetime
-from sqlalchemy import create_engine
-from sqlalchemy.orm import sessionmaker, Session
+from sqlalchemy.orm import sessionmaker
 
 
 Base = declarative_base()
@@ -17,7 +16,7 @@ class BusinessSymptomData(Base):
 
     id = Column(Integer, primary_key=True, autoincrement=True, unique=True)
     business_id = Column(Integer, nullable=False)
-    business_name = Column(String(10),  nullable=False)
-    symptom_code = Column(String(10),  nullable=False)
-    symptom_name = Column(String(20),  nullable=False)
+    business_name = Column(String(30),  nullable=False)
+    symptom_code = Column(String(30),  nullable=False)
+    symptom_name = Column(String(30),  nullable=False)
     symptom_diagnostic = Column(Boolean,  nullable=False)

@@ -23,3 +23,21 @@ Below are all the tasks/expectations required to complete this challenge. These 
 As a note, FastAPI, uvicorn, sqlalchemy, and alembic are not required to be used and may be changed if desired. 
 Any of the existing files or variables can be and may need to be changed or updated, please be prepared to explain changes on the follow-up call.
 The final end result should be a filled database, two working APIs, and an accessible API docs page.
+
+
+# Approach
+
+step 1: Created a virtual environment and install the required packages
+
+step 2: Designed a database mock-up using PostgreSQL based on given csv in data folder
+
+step 3: Generated and ran migration scripts
+
+step 4: Created data model (BusinessSymptomData) using SQLAlchemy in "app\models.py"
+
+step 5: Created an endpoint that returns business and symptom data with two optional parameters - business_id & diagnostic
+
+step 6: Created an endpoint for importing a CSV file into the database
+
+step 7: Tested APIs using combinatorial testing (manual)
+
